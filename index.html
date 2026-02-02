@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veux-tu être ma Valentine ?</title>
     <style>
+        /* Style général */
         body {
             display: flex;
             flex-direction: column;
@@ -12,80 +13,70 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #fce4ec; /* Rose loutre doux */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffe6e6; /* Rose pâle */
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            overflow: hidden;
+            overflow: hidden; /* Empêche le défilement si le bouton sort */
         }
 
-        h1 { color: #d81b60; font-size: 1.8rem; margin: 20px; }
-
-        .gif-container img {
-            width: 250px;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        h1 {
+            color: #ff4d6d;
+            font-size: 2rem;
         }
 
         .buttons {
-            margin-top: 30px;
+            margin-top: 20px;
             position: relative;
             width: 100%;
-            height: 150px;
+            height: 100px;
         }
 
         button {
-            padding: 15px 35px;
+            padding: 15px 30px;
             font-size: 1.2rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
 
-        #btnOui { background-color: #ff4d6d; color: white; }
+        #btnOui {
+            background-color: #ff4d6d;
+            color: white;
+        }
 
         #btnNon {
-            background-color: #bdbdbd;
+            background-color: #888;
             color: white;
             position: absolute;
-            left: 50%;
-            transform: translateX(15px);
+            left: 55%; /* Position initiale */
+        }
+
+        .gif-container img {
+            width: 200px;
+            border-radius: 10px;
         }
     </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
-    <audio id="musique" loop>
-        <source src="https://www.cjoint.com/doc/24_07/NHBvVlX5X7A_Celine-Dion-Hymne-a-l-amour-JO-2024.mp3" type="audio/mpeg">
-    </audio>
+    <div class="gif-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp1ZzRyeGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6JnB0PWFwcCZvPTE/KztT2c4u8mYYUiCiS7/giphy.gif" alt="Cute Bear">
+    </div>
 
-    <div id="main-content">
-        <div class="gif-container">
-            <img id="image-loutre" src="https://media.tenor.com/E8S0_j_G59AAAAAi/otter-cute.gif" alt="Loutre mignonne">
-        </div>
+    <h1>Veux-tu être ma Valentine ? ❤️</h1>
 
-        <h1>Veux-tu être ma Valentine ? 🦦❤️</h1>
-
-        <div class="buttons">
-            <button id="btnOui" onclick="celebrer(event)">OUI !</button>
-            <button id="btnNon" onmouseover="fuir()" onclick="fuir(event)">Non</button>
-        </div>
+    <div class="buttons">
+        <button id="btnOui" onclick="celebrer()">OUI !</button>
+        <button id="btnNon" onmouseover="fuir()" onclick="fuir()">Non</button>
     </div>
 
     <script>
-        const musique = document.getElementById('musique');
-
-        function playMusic() {
-            musique.play().catch(e => console.log("Audio en attente"));
-        }
-
-        function fuir(event) {
-            if(event) event.stopPropagation();
+        function fuir() {
             const btnNon = document.getElementById('btnNon');
             
-            // Calcul aléatoire pour que le bouton reste visible à l'écran
+            // Calcul de positions aléatoires
+            // On garde le bouton dans les limites de l'écran visible
             const x = Math.random() * (window.innerWidth - btnNon.offsetWidth);
             const y = Math.random() * (window.innerHeight - btnNon.offsetHeight);
 
@@ -94,16 +85,9 @@
             btnNon.style.top = y + "px";
         }
 
-        function celebrer(event) {
-            event.stopPropagation();
-            // On remplace tout le contenu par la célébration loutre
-            document.body.innerHTML = `
-                <h1 style="color: #d81b60;">OUI ! On est fait l'un pour l'autre ! 🦦✨</h1>
-                <div class='gif-container'>
-                    <img src='https://media.tenor.com/Gf7396v_t_gAAAAM/otters-holding-hands.gif'>
-                </div>
-                <p style="font-size: 1.5rem; color: #d81b60; margin-top: 20px;">❤️ Prépare-toi pour le 14 ! ❤️</p>
-            `;
+        function celebrer() {
+            alert("Yeaaaah ! ❤️ Je savais que tu dirais oui !");
+            document.body.innerHTML = "<h1>On se voit le 14 ! 🌹❤️</h1><div class='gif-container'><img src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp1ZzRyeGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6JnB0PWFwcCZvPTE/l4pTdcifPKUYMDRIs/giphy.gif'></div>";
         }
     </script>
 </body>
